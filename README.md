@@ -38,25 +38,11 @@ User state determines the possible statuses a user account can be in. States,  i
 -inactive
 ### <a name="versions"></a>*5. User transitions*
 User transitions are based on user actions, verification processes (e.g., KYC), and partner-defined rules. Users can transition between user types based on specific criteria:
-```plantuml
-Guest --> Basic --> Advanced
 
-Advanced --> Basic --> Guest
 
-Company --> Advanced
-
-Advanced ---> Company
-```
+![](Diagrams/diag2.png)
 ### <a name="versions"></a>*6. User Transitions Diagram*
-```plantuml
-Guest --> Basic : KYC Completed
-Basic --> Advanced : User Progression
-Advanced --> Basic : User Demotion
-Advanced --> Company : Company Status
-Company --> Advanced : Company Promotion
-Basic --> Guest : Limits Exceeded
-Advanced --> Guest : User Demotion
-```
+![](Diagrams/change.png)
 
 ### <a name="versions"></a>*7. Conclusion*
 The system architecture described above provides a flexible and scalable solution for managing partner-specific services and user types. This document serves as a guide to understand the system's internal workings and can be used for further development and maintenance.
