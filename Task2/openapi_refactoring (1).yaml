@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: User Subscription API
+  version: 3.0.1
+  description: |-
+    This is a sample User Subscription API
+
+paths:
+  /api/external/user:
+    get:
+      summary: Get user information
+      parameters:
+        - name: user_id
+          in: query
+          schema:
+            type: string
+            minLength: 7
+            maxLength: 7
+          description: Unique user identifier #Seven characters long
+          example: "3453255"
+        - name: from
+          in: query
+          schema:
+            type: integer
+          description: Pagination start timestamp #Timestamp in nanoseconds
+          example: 1628883600000
+        - name: to
+          in: query
+          schema:
+            type: integer
+          description: Pagination end timestamp #Timestamp in nanoseconds
+          example: 1628883600000
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 10
+            maximum: 1000
+            default: 1000 #default: 1000
+          description: Limit to records returned
+        - name: provider_id
+          in: query
+          schema:
+            type: string
+            minLength: 4
+            maxLength: 4
+            example: "2323"
+          description: Unique identifier of the partner a user bound to
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - user_id: "3453255"
+                  provider_id: "2323"
+                  status: "active"
+                  type: "basic"
+                  zone: "us"
+
+  /api/partner:
+    get:
+      summary: Get information
+      parameters:
+        - name: provider_id
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 4
+            maxLength: 4
+            example: "2323"
+          description: Unique partner identifier #Seven characters long
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: active, stopped
+          description: Partner operation state
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - provider_id: "2323"
+                  status: ["active", "stopped"]
